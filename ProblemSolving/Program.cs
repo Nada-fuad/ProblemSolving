@@ -15,6 +15,17 @@ class Program
         Console.WriteLine($"number Of Digit Frequency : {FrequencyDigit(223322, 2)}");
         AllFrequencyDigit(2233);
         PrintInOrder(2345);
+        Console.WriteLine(IsPalindrom(14521));
+        InvertedNumberPattern(5);
+        NumberPattern(5);
+        InvertedLetterPattern(5);
+        LetterPattern(5);
+        Console.WriteLine(AAAToZZZ());
+        GuessLetterPass("AAF");
+       Encrypt("Mohammed", 2);
+       DeCrypt("Oqjcoogf", 2);
+        //Console.WriteLine(GetRandomNumber(1, 10));
+        PrintThreeRandom();
     }
 
 
@@ -162,4 +173,143 @@ class Program
         }
     }
 
+
+    public static bool IsPalindrom(int number)
+    {
+        int reverseNum = ReverseNumber(number);
+        if (number == reverseNum)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public static void InvertedNumberPattern(int number)
+    {
+        for (int i = number; i >0; i--)
+        {
+            for (int j = i; j > 0; j--)
+            {
+                Console.Write(i+" ");
+            }
+
+            Console.WriteLine(" ");
+        }
+    }
+
+    public static void NumberPattern(int number)
+    {
+        for (int i = 1; i < number; i++)
+        {
+            for (int j = i; j < number; j++)
+            {
+                Console.Write(i + " ");
+            }
+            Console.WriteLine(" ");
+        }
+    }
+
+    public static void InvertedLetterPattern(int number)
+    {
+        for (int i = 65+number; i >= 65 ; i--) 
+        {
+            for (int j = i; j >= 65; j--)
+            {
+                Console.Write((char)i + " ");
+            }
+            Console.WriteLine(" ");
+        }
+    }
+
+    public static void LetterPattern(int number)
+    {
+        for (int i = 65; i < 65+number; i++)
+        {
+            for (int j = 65; j <= i; j++)
+            {
+                Console.Write((char)i + " ");
+            }
+            Console.WriteLine(" ");
+        }
+    }
+
+    public static IEnumerable<string> AAAToZZZ()
+      
+    {
+       
+        for (int i = 65; i <=90; i++)
+        {
+
+
+            for (int j = 65; j <= 90; j++)
+            {
+
+                for (int k = 65; k <= 90; k++)
+                {
+                    yield return $"{(char)i}{(char)j}{(char)k}";
+
+                }
+
+                
+            }
+           
+        }
+       
+    }
+
+    public static void GuessLetterPass(string pass)
+    {
+        int count = 0;
+        foreach (string guess in AAAToZZZ()){
+            count++;
+            if (guess == pass){
+
+                Console.WriteLine(guess);
+                break;
+
+            }
+            Console.WriteLine($"{guess} ");
+
+        }
+        Console.WriteLine($"Guess is After {count}");
+    }
+        
+    public static void Encrypt(string name ,int num)
+    {
+        string result = "";
+        for (int i = 0; i <name.Length; i++)
+        {
+            char c = name[i];
+            char encrypt = (char)(c + num);
+            result += encrypt;
+        }
+        Console.WriteLine(result);
+    }
+
+    public static void DeCrypt(string name , int num)
+    {
+        string result = "";
+        for (int i = 0; i < name.Length; i++)
+        {
+            char c = name[i];
+            char decrypt = (char)(c - num);
+            result += decrypt;
+        }
+        Console.WriteLine(result);
+    }
+
+    public static int GetRandomNumber(int min,int max)
+    {
+        Random random = new Random();
+        int rand=random.Next(min, max + 1);
+        return rand;
+    }
+
+    public static void PrintThreeRandom()
+    {
+        for (int i = 1; i < 4; i++)
+        {
+            Console.Write(GetRandomNumber(1, 10)+ " ");
+        }
+    }
 }
