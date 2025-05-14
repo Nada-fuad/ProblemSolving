@@ -26,6 +26,18 @@ class Program
        DeCrypt("Oqjcoogf", 2);
         //Console.WriteLine(GetRandomNumber(1, 10));
         PrintThreeRandom();
+        Employees emp = new Employees("Ahmed",10,2);
+        Console.WriteLine($"Your Salary is: {emp.Name}  {emp.CalculateNetSalary()}");
+        emp = new Employees("Ali", 12, 2);
+        Console.WriteLine($"Your Salary is: {emp.Name}   {emp.CalculateNetSalary()} {Employees.TAX}");
+       PrintArrayWithRandom();
+        Console.WriteLine("max num is  :" + PrintMaxNumOfRandom());
+        Console.WriteLine("min num is  :" + PrintMinNumOfRandom());
+        Console.WriteLine("sum   :" + SumNumOfRandom());
+        Console.WriteLine("Average  :" + AverageOfRandom());
+        CopyOfArray();
+        
+
     }
 
 
@@ -309,7 +321,122 @@ class Program
     {
         for (int i = 1; i < 4; i++)
         {
-            Console.Write(GetRandomNumber(1, 10)+ " ");
+            Console.WriteLine(GetRandomNumber(1, 10)+ " ");
         }
+    }
+    class Employees
+    {
+        public const double TAX=0.03;
+        public string Name;
+        public double HoursWorked;
+        public double HourlyWage;
+        
+        public Employees(string name , double hoursWorked, double hourlyWage)
+        {
+            Name = name;
+            HourlyWage = hourlyWage;
+            HoursWorked = hoursWorked;
+           
+
+        }
+
+
+        public double CalculateNetSalary()
+        {
+            double sum = HourlyWage * HoursWorked;
+                double net =sum - TAX;
+            return sum;
+        }
+    }
+
+    
+    public static void FillArrayWithRandom(int[] a)
+    {
+      
+        for (int i = 0; i < 10; i++)
+        {
+            a[i] = GetRandomNumber(1, 101);
+        }
+    }
+    public static int[] PrintArrayWithRandom()
+    {
+        int[] a = new int[10];
+        FillArrayWithRandom(a);
+        foreach (int i in a)
+        {
+            Console.Write(i + " ,");
+        }
+        Console.WriteLine();
+        return a;
+    }
+
+    public static int PrintMaxNumOfRandom()
+    {
+        int[] a = PrintArrayWithRandom();
+        int max = a[0];
+        for (int i = 0; i < a.Length; i++)
+        {
+           if( a[i] >max)
+            {
+                max = a[i];
+            }
+        }
+        return max;
+    }
+    public static int PrintMinNumOfRandom()
+    {
+        int[]a= PrintArrayWithRandom();
+       int min= a[0];
+        for (int i = 0; i < a.Length; i++)
+        {
+            if (a[i] < min)
+            {
+                min = a[i];
+            }
+        }
+        return min;
+    }
+    public static int SumNumOfRandom()
+    {
+        int[] a = PrintArrayWithRandom();
+        int sum = 0;
+        for (int i = 0; i < a.Length; i++)
+        {
+            sum += a[i];
+        }
+        return sum;
+    }
+
+    public static double AverageOfRandom()
+    {
+        int[] a = PrintArrayWithRandom();
+        int n = a.Length;
+        double average = SumNumOfRandom() / n;
+        return average;
+    }
+
+    public static int[] CopyOfArray()
+    {
+        int[]a= PrintArrayWithRandom();
+        Console.Write("Original Of Array: ");
+        foreach (int n in a)
+        {
+           
+            Console.Write(n+ " , ");
+        }
+       
+        int[] b=new int[10];
+        for (int i = 0; i < a.Length; i++)
+        {
+            b[i] = a[i];
+        }
+        Console.WriteLine(" ");
+        Console.Write("Copy Of Array:   ");
+        foreach (int m in b)
+        {
+            
+            Console.Write(m + ",  ");
+        }
+        return b;
     }
 }
